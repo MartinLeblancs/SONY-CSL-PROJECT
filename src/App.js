@@ -1,10 +1,14 @@
-import background from "./assets/background.jpg"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{
+      backgroundImage: "url(/background.jpg)",
+      width: '100vw',
+      height: '100vh',
+      backgroundRepeat: "no-repeat",
+      backgroundSize: 'cover'
+      }}>
       <header className="App-header">
-        <img src={background} className="App-logo" alt="background" />
         <p>
           Edit <code>src/App.js</code> and save to reload (test).
         </p>
