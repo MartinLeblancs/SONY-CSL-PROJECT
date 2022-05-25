@@ -1,4 +1,9 @@
 import React, {Component} from "react"
+import HeaderWeb from "./components/HeaderWeb"
+import LanguageButton from "./components/LanguageButton"
+import MusicList from "./components/MusicList"
+import MusicApi from "./components/MusicApi"
+import ShareButton from "./components/ShareButton"
 
 class App extends Component {
   render() {
@@ -11,7 +16,21 @@ class App extends Component {
         backgroundRepeat: "no-repeat",
         backgroundSize: 'cover'
       }}>
-        <header className="App-header">
+      <div style={{
+        flex: 1
+      }}>
+          <p>
+            Edit <code>src/App.js</code> and save to reload (flex1).
+          </p>
+      </div>
+      <div style={{
+        flex: 2
+      }}>
+          <p>
+            Edit <code>src/App.js</code> and save to reload (flex2).
+          </p>
+      </div>
+        {/* <header className="App-header">
           <p>
             Edit <code>src/App.js</code> and save to reload (test).
           </p>
@@ -23,7 +42,7 @@ class App extends Component {
           >
             Learn React
           </a>
-        </header>
+        </header> */}
         {/* <body>
         </body> */}
       </div>
