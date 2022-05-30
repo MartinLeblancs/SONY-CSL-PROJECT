@@ -19,16 +19,12 @@ class App extends Component {
       <div style={{
         flex: 1
       }}>
-          <p>
-            Edit <code>src/App.js</code> and save to reload (flex1).
-          </p>
       </div>
       <div style={{
         flex: 2
       }}>
-          <p>
-            Edit <code>src/App.js</code> and save to reload (flex2).
-          </p>
+          <p>test</p>
+
       </div>
         {/* <header className="App-header">
           <p>
