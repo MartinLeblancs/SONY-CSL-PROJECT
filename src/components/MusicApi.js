@@ -42,7 +42,6 @@ class MusicApi extends React.Component {
             })
             .then((data) => {
                 data.render()
-
                 // Work with JSON data here
                 console.log(data)
             })

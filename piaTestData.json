@@ -1,0 +1,26 @@
+{
+  "id": 0,
+  "clip_id": 0,
+  "detail_clip_id": 0,
+  "note_density": 0.1,
+  "tempo": 120,
+  "case": "start",
+  "top_p": 0.949999988079071,
+  "superconditioning": 1,
+  "clip_start": 0.0,
+  "clip_end": 5,
+  "selected_region": {
+    "start": 1,
+    "end": 2
+  },
+  "notes": [
+    "notes",
+    1,
+    "note",
+    76,
+    0.0,
+    0.0,
+    120,
+      0
+  ]
+}
