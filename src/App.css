@@ -1,4 +1,9 @@
-div, html {
+/* div, html {
     height: 100%;
     margin: 0;
-}
+} */
+
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }  
