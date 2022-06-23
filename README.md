@@ -40,7 +40,7 @@
 </div>
 
 
-The project consists in creating a website allowing to recover a score of a MIDI file to then cut it, recover the piece, provide it to the Sony API which will auto-complete this hole in the partition.
+The project consists in creating a website allowing to recover a partition of a MIDI file to then cut it, recover the piece, provide it to the Sony API which will auto-complete this hole in the partition.
 
 ### Built With
 
