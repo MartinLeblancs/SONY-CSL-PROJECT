@@ -51,6 +51,15 @@ SGRO SANDRO &emsp;| sandro.sgro@epitech.eu<br />
 QUEREU Matthieu | matthieu.queru@epitech.eu<br />
 LEBLANCS Martin | martin.leblancs@epitech.eu
 
+## Getting started
+
+```
+You only need npm:
+- sudo apt install npm
+OR
+- sudo dnf install npm
+```
+
 ### Installation
 
 Clone the repo
