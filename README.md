@@ -64,7 +64,7 @@ OR
 
 Clone the repo
    ```sh
-   - git clone git@github.com:EpitechPromo2025/B-OOP-400-PAR-4-1-arcade-matthieu.queru.git
+   - git clone git@github.com:MartinLeblancs/SONY-CSL-PROJECT.git
    ```
 
 ## Usage
