@@ -4,7 +4,7 @@
 // import MusicList from "./components/MusicList"
 // import MusicApi from "./components/MusicApi"
 // import ShareButton from "./components/ShareButton"
-
+//
 // class App extends Component {
 //   render() {
 //     return (
@@ -24,7 +24,7 @@
 //         flex: 2
 //       }}>
 //           <p>test</p>
-
+//
 //       </div>
 //         {/* <header className="App-header">
 //           <p>
@@ -45,12 +45,13 @@
 //     )
 //   }
 // }
-
+//
 // export default App;
 
 import "./App.css";
 import { useRef, useState } from "react";
 import PianoRoll from "react-piano-roll";
+import {MusicApi} from "./components/MusicApi";
 
 export default function App() {
   const [state, setState] = useState(0);
@@ -65,7 +66,9 @@ export default function App() {
     }
   });
   return (
-    <div className="App">
+      <>
+      <MusicApi></MusicApi>
+        <div className="App">
       <PianoRoll
         width={810}
         height={400}
@@ -85,5 +88,7 @@ export default function App() {
       />
       <button onClick={() => setState(state + 1)}>set state</button>
     </div>
-  );
+      </>
+
+  )
 }
