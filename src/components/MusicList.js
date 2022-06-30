@@ -1,19 +1,19 @@
 import React, { Component, useState  } from 'react';
-import {FormControl, Dropdown, Navbar, NavDropdown, Nav, Container} from "react-bootstrap";
+import {FormControl, Dropdown, Navbar, NavDropdown, Nav, Container, DropdownButton} from "react-bootstrap";
 // import {DropdownButton} from "react-bootstrap";
 
-const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-        href=""
-        ref={ref}
+const CustomToggle = (({ children, onClick }) => (
+    <DropdownButton
         onClick={(e) => {
             e.preventDefault();
             onClick(e);
         }}
-    >
+        title={"Musiques"}
+        id="dropdown-basic-button"
+        variant={"dark"}>
         {children}
         &#x25bc;
-    </a>
+    </DropdownButton>
 ));
 
 // forwardRef again here!
@@ -54,20 +54,21 @@ class MusicList extends Component {
         <Navbar variant="dark" bg="dark" expand="lg">
             <Container fluid>
                 <Navbar.Brand href="#home">MUSIQUE A TROUS</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbar-dark-example" />
+                <Navbar.Toggle  aria-controls="navbar-dark-example" />
                 <Navbar.Collapse id="navbar-dark-example">
+
                     <Nav>
-                        <NavDropdown
-                            id="nav-dropdown-dark-example"
-                            title="Musiques"
-                            menuVariant="dark"
-                        >
-                            <NavDropdown.Item href="#action/3.1">TEST1</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">TEST2</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">TEST3</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action/3.4">TEST4</NavDropdown.Item>
-                        </NavDropdown>
+                        <Dropdown >
+
+                            <Dropdown.Toggle as={CustomToggle} />
+                            <Dropdown.Menu as={CustomMenu}  variant="dark">
+                                <Dropdown.Item href="1">Red</Dropdown.Item>
+                                <Dropdown.Item href="2">Blue</Dropdown.Item>
+                                <Dropdown.Item href="3">Orange</Dropdown.Item>
+                                <Dropdown.Item href="4">Red-Orange</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
                     </Nav>
                 </Navbar.Collapse>
             </Container>
