@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from "./App"
+import MusicList from "./components/MusicList";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <App />
+        <MusicList />
     </React.StrictMode>
 );
 //import { StrictMode } from "react";
