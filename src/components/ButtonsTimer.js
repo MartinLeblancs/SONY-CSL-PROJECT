@@ -28,7 +28,9 @@ class ButtonsTimer extends React.Component{
         const {start, end} = this.state;
         return (
             <section className="container">
-                <h2>START:</h2>
+                <div style={{position: "absolute", left: 1050, top: 80}}>
+                    <h3>Start:</h3>
+                </div>
                 <section>
                     <TimeField
                         showSeconds
@@ -40,11 +42,16 @@ class ButtonsTimer extends React.Component{
                             width: 180,
                             padding: '5px 8px',
                             color: '#333',
-                            borderRadius: 3
+                            borderRadius: 3,
+                            position: "absolute",
+                            left: 1000,
+                            top: 120
                         }}
                     />
                 </section>
-                <h2>END:</h2>
+                <div style={{position: "absolute", left: 100, top: 80}}>
+                    <h3>END:</h3>
+                </div>
                 <section>
                     <TimeField
                         showSeconds
@@ -56,7 +63,10 @@ class ButtonsTimer extends React.Component{
                             width: 180,
                             padding: '5px 8px',
                             color: '#333',
-                            borderRadius: 3
+                            borderRadius: 3,
+                            position: "absolute",
+                            left: 50,
+                            top: 120
                         }}
                     />
                 </section>
