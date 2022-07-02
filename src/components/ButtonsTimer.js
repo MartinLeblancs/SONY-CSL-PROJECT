@@ -30,7 +30,6 @@ class ButtonsTimer extends React.Component{
     }
     render() {
         const {ValueStart, ValueEnd} = this.state;
-        console.log(ValueStart, ValueEnd)
         return (
             <section className="container">
                 <div style={{position: "absolute", left: 100, top: 80}}>
