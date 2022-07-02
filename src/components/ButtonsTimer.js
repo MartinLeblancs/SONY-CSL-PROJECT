@@ -25,7 +25,7 @@ class ButtonsTimer extends React.Component{
         this.setState({time, timeSeconds, timeSecondsCustomColon});
     }
     render() {
-        const {start, end} = this.state;
+        const {ValueStart, ValueEnd} = this.state;
         return (
             <section className="container">
                 <div style={{position: "absolute", left: 1050, top: 80}}>
@@ -34,7 +34,7 @@ class ButtonsTimer extends React.Component{
                 <section>
                     <TimeField
                         showSeconds
-                        value={start}
+                        value={ValueStart}
                         onChange={this.onTimeChange}
                         style={{
                             border: '2px solid #666',
@@ -55,7 +55,7 @@ class ButtonsTimer extends React.Component{
                 <section>
                     <TimeField
                         showSeconds
-                        value={end}
+                        value={ValueEnd}
                         onChange={this.onTimeChange}
                         style={{
                             border: '2px solid #666',
