@@ -8,34 +8,39 @@ class ButtonsTimer extends React.Component{
         super();
 
         this.state = {
-            time: '12:34',
-            timeSeconds: '12:34:56',
-            timeSecondsCustomColon: '12-34-56'
+            ValueStart: '00:00:00',
+            ValueEnd: '00:00:00',
         };
 
-        this.onTimeChange = this.onTimeChange.bind(this);
+        this.onTimeChange1 = this.onTimeChange1.bind(this);
+        this.onTimeChange2 = this.onTimeChange2.bind(this);
     }
 
-    onTimeChange(event, value) {
-        const newTime = value.replace(/-/g, ':');
-        const time = newTime.substr(0, 5);
-        const timeSeconds = newTime.padEnd(8, this.state.timeSeconds.substr(5, 3));
-        const timeSecondsCustomColon = timeSeconds.replace(/:/g, '-');
+    onTimeChange1(event, value) {
+        const newTime1 = value.replace(/-/g, ':');
+        const ValueStart = newTime1.padEnd(8, this.state.ValueStart.substr(5, 3));
 
-        this.setState({time, timeSeconds, timeSecondsCustomColon});
+        this.setState({ValueStart});
+    }
+    onTimeChange2(event, value) {
+        const newTime2 = value.replace(/-/g, ':');
+        const ValueEnd = newTime2.padEnd(8, this.state.ValueEnd.substr(5, 3));
+
+        this.setState({ValueEnd});
     }
     render() {
         const {ValueStart, ValueEnd} = this.state;
+        console.log(ValueStart, ValueEnd)
         return (
             <section className="container">
-                <div style={{position: "absolute", left: 1050, top: 80}}>
+                <div style={{position: "absolute", left: 100, top: 80}}>
                     <h3>Start:</h3>
                 </div>
                 <section>
                     <TimeField
                         showSeconds
                         value={ValueStart}
-                        onChange={this.onTimeChange}
+                        onChange={this.onTimeChange1}
                         style={{
                             border: '2px solid #666',
                             fontSize: 42,
@@ -49,14 +54,14 @@ class ButtonsTimer extends React.Component{
                         }}
                     />
                 </section>
-                <div style={{position: "absolute", left: 100, top: 80}}>
+                <div style={{position: "absolute", left: 1050, top: 80}}>
                     <h3>END:</h3>
                 </div>
                 <section>
                     <TimeField
                         showSeconds
                         value={ValueEnd}
-                        onChange={this.onTimeChange}
+                        onChange={this.onTimeChange2}
                         style={{
                             border: '2px solid #666',
                             fontSize: 42,
