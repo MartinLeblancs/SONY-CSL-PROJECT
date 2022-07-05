@@ -48,31 +48,31 @@ const CustomMenu = React.forwardRef(
 );
 
 class MusicList extends Component {
-
-  render() {
-    return (
-        <Navbar variant="dark" bg="dark" expand="lg">
-            <Container fluid>
+    handleCLick = (ChosenMusic) => {
+        console.log(ChosenMusic);
+    }
+    render() {
+        return (
+      <Navbar variant="dark" bg="dark" expand="lg">
+          <Container fluid>
                 <Navbar.Brand href="#home">MUSIQUE A TROUS</Navbar.Brand>
                 <Navbar.Toggle  aria-controls="navbar-dark-example" />
                 <Navbar.Collapse id="navbar-dark-example">
-
                     <Nav>
                         <Dropdown >
-
                             <Dropdown.Toggle as={CustomToggle} />
                             <Dropdown.Menu as={CustomMenu}  variant="dark">
-                                <Dropdown.Item href="1">Red</Dropdown.Item>
-                                <Dropdown.Item href="2">Blue</Dropdown.Item>
-                                <Dropdown.Item href="3">Orange</Dropdown.Item>
-                                <Dropdown.Item href="4">Red-Orange</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique1')}>Musique1</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique2')}>Musique2</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique3')}>Musique3</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique4')}>Musique4</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar>
+      </Navbar>
     );
   }
 }
