@@ -1,6 +1,6 @@
 import React from 'react';
 
-export async function MusicApi()
+async function MusicApi()
 {
     // modify the file we gonna pass to the api
     const response = await fetch('piaTestData.json')
@@ -22,3 +22,12 @@ export async function MusicApi()
     console.log(responseJSON);
     // use the return of the API to set a new midi file
 }
+
+function mapStateToProps(state) {
+    return {
+        start = state.start,
+        end = state.end
+    }
+}
+
+export default connect(mapStateToProps)(MusicApi)

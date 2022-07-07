@@ -79,4 +79,9 @@ class ButtonsTimer extends React.Component{
     }
 }
 
-export default ButtonsTimer;
+function mapStateToProps(state) {
+    const { start } = state
+    return { todoList: todos.allIds }
+}
+
+export default connect(mapStateToProps)(ButtonsTimer)
