@@ -1,15 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = 
-{
-    start: "0",
-    end: "0"
-}
+export const StoreSlice = createSlice({
+  name: 'counter',
+  initialState: {
+    start: '0',
+    end: '0',
+  },
+  reducers: {
+    StoreStart: (state, start) => {
+      state.start = start
+    },
+    StoreEnd: (state, end) => {
+      state.end = end
+    },
+  },
+})
 
-function storeValuesStartEnd(state = initialState, new_start_, new_end) {
-    state.start = new_start;
-    state.end = new_end;
-    return state;
-}
-  
-export default storeValuesStartEnd
+export const { StoreStart, StoreEnd } = StoreSlice.actions
+
+export default StoreSlice.reducer

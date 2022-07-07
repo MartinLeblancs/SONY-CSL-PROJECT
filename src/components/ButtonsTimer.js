@@ -2,6 +2,13 @@ import * as React from 'react';
 import TimeField from 'react-simple-timefield';
 import './ButtonsTimer.css'
 
+import { useSelector, useDispatch } from 'react-redux'
+import { storeValuesStartEnd } from "./../reducer/ButtonTimerReducer"
+
+const start = useSelector((state) => state.values.start)
+const end = useSelector((state) => state.values.end)
+const dispatch = useDispatch()
+
 class ButtonsTimer extends React.Component{
     constructor() {
         super();
@@ -44,6 +51,7 @@ class ButtonsTimer extends React.Component{
         const newTime1 = value.replace(/-/g, ':');
         const ValueStart = newTime1.padEnd(8, this.state.ValueStart.substr(5, 3));
         const result1 = this.getSecondsFromHHMMSS(ValueStart);
+        dispatch(start(ValueStart));
         this.setState({result1});
     }
     // For ValueEnd
@@ -51,6 +59,7 @@ class ButtonsTimer extends React.Component{
         const newTime2 = value.replace(/-/g, ':');
         const ValueEnd = newTime2.padEnd(8, this.state.ValueEnd.substr(5, 3));
         const result2 = this.getSecondsFromHHMMSS(ValueEnd);
+        dispatch(end(ValueEnd));
         this.setState({result2});
     }
     render() {
@@ -105,4 +114,11 @@ class ButtonsTimer extends React.Component{
     }
 }
 
-export default ButtonsTimer;
+function mapStateToProps(state) {
+    return {
+        start = state.start,
+        end = state.end
+    }
+}
+
+export default connect(mapStateToProps)(ButtonsTimer)

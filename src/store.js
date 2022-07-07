@@ -3,6 +3,6 @@ import storeValuesStartEnd from "./reducer/ButtonTimerReducer"
 
 export default configureStore({
   reducer: {
-      Values: storeValuesStartEnd,
+    values: storeValuesStartEnd,
   },
 })
