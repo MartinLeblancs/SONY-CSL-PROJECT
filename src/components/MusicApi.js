@@ -1,20 +1,34 @@
 import React from 'react';
+import * as Tone from "tone"
+import { Midi } from '@tonejs/midi'
 
-async function MusicApi()
+export async function MusicApi()
 {
+    const midi = await Midi.fromUrl("Mario Bros. - Super Mario Bros. Theme.mid");
+    const midiFileInJson = midi.toJSON();
+    let timeMidi = 0;
+
+    // getting the time of the last note (so the duration of the midi file)
+    for (let j = 0; midiFileInJson.tracks[j]; j++) {
+        for (let i = 0; midiFileInJson.tracks[j].notes[i]; i++)  {
+            if (midiFileInJson.tracks[j].notes[i].time > timeMidi)
+                timeMidi = midiFileInJson.tracks[j].notes[i].time;
+        }
+    }
     // modify the file we gonna pass to the api
     const response = await fetch('piaTestData.json')
     const data = await response.json();
-    data.clip_end = 0;
+    data.clip_end = timeMidi;
     data.selected_region.start = 0;
-    data.selected_region.end = 0;
-    data.notes = 0;
+    data.selected_region.end = 5;
+    data.notes = midiFileInJson.tracks;
     console.log(data);
 
+    // setting the infos we gonna send to the API
     const requestOptions = {
         crossDomain: true,
         method: 'POST',
-        body: JSON.stringify({"id":0,"clip_id":0,"detail_clip_id":0,"note_density":0.1,"tempo":120,"case":"start","top_p":0.949999988079071,"superconditioning":1,"clip_start":0.0,"clip_end":5,"selected_region":{"start":1,"end":2},"notes":["notes",1,"note",76,0.0,0.0,120,0]})
+        body: JSON.stringify(data)
     };
     console.log("waiting...");
     const response2 = await fetch('https://pia.api.cslmusic.team/', requestOptions);
@@ -25,9 +39,9 @@ async function MusicApi()
 
 function mapStateToProps(state) {
     return {
-        start = state.start,
-        end = state.end
+        start: state.start,
+        end: state.end
     }
 }
 
-export default connect(mapStateToProps)(MusicApi)
+// export default connect(mapStateToProps)(MusicApi)
