@@ -2,8 +2,7 @@ import * as React from 'react';
 import TimeField from 'react-simple-timefield';
 import './ButtonsTimer.css'
 
-// import { useSelector, useDispatch } from 'react-redux'
-// import { storeValuesStartEnd } from "./../reducer/ButtonTimerReducer"
+import {useCallback, useState} from "react";
 
 // const start = useSelector((state) => state.values.start)
 // const end = useSelector((state) => state.values.end)
@@ -73,7 +72,7 @@ function ButtonsTimer(props) {
                 <TimeField
                     showSeconds
                     value={valueStart}
-                    onChange={this.onTimeChange1}
+                    onChange={onTimeChange1}
                     style={{
                         border: '2px solid #666',
                         fontSize: 42,
@@ -94,7 +93,7 @@ function ButtonsTimer(props) {
                 <TimeField
                     showSeconds
                     value={valueEnd}
-                    onChange={this.onTimeChange2}
+                    onChange={onTimeChange2}
                     style={{
                         border: '2px solid #666',
                         fontSize: 42,
@@ -226,4 +225,4 @@ function mapStateToProps(state) {
 }
 
 // export default connect(mapStateToProps)(ButtonsTimer)
-export default ButtonsTimer
+export { ButtonsTimer }

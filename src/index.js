@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import MusicList from "./components/MusicList";
-import ButtonsTimer from "./components/ButtonsTimer"
+import { ButtonsTimer } from "./components/ButtonsTimer"
 import { MusicApi } from "./components/MusicApi"
 import { Provider } from 'react-redux'
 import store from './store'
