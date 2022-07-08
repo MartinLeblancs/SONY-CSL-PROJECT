@@ -1,0 +1,58 @@
+
+.button{
+    position: relative;
+    top: 90px; left: 37%;
+    align-items: center;
+    background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+    border: 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: "Codec cold",sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    height: 70px;
+    justify-content: center;
+    letter-spacing: .4px;
+    line-height: 1;
+    max-width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button:active {
+    outline: 0;
+}
+
+.button:hover {
+    outline: 0;
+}
+
+.button span {
+    transition: all 200ms;
+}
+
+.button:hover span {
+    transform: scale(.9);
+    opacity: .75;
+}
+
+@media screen and (max-width: 991px) {
+    .button {
+        font-size: 15px;
+        height: 50px;
+    }
+
+    .button span {
+        line-height: 50px;
+    }
+}

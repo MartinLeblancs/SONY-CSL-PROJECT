@@ -4,7 +4,7 @@ import { Midi } from '@tonejs/midi'
 
 export async function MusicApi()
 {
-    const midi = await Midi.fromUrl("Mario Bros. - Super Mario Bros. Theme.mid");
+    const midi = await Midi.fromUrl("mozart-symphony41-3-piano.mid");
     const midiFileInJson = midi.toJSON();
     let timeMidi = 0;
 
@@ -15,6 +15,7 @@ export async function MusicApi()
                 timeMidi = midiFileInJson.tracks[j].notes[i].time;
         }
     }
+
     // modify the file we gonna pass to the api
     const response = await fetch('piaTestData.json')
     const data = await response.json();
