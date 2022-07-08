@@ -1,6 +1,7 @@
 import React, { Component, useState  } from 'react';
-import {FormControl, Dropdown, Navbar, NavDropdown, Nav, Container, DropdownButton} from "react-bootstrap";
-// import {DropdownButton} from "react-bootstrap";
+import {FormControl, Dropdown, Navbar, Nav, Container, DropdownButton} from "react-bootstrap";
+
+export let musicUpdated = 'Mario Bros. - Super Mario Bros. Theme.mid';
 
 const CustomToggle = (({ children, onClick }) => (
     <DropdownButton
@@ -47,9 +48,14 @@ const CustomMenu = React.forwardRef(
     },
 );
 
+
 class MusicList extends Component {
     handleCLick = (ChosenMusic) => {
+        // Updating the current music
         document.getElementById('test').src=ChosenMusic;
+        // Variable we gonna pass to MusicApi
+        musicUpdated = ChosenMusic
+        // We successfully update the music we gonna pass to the API and the music that will be played
     }
     render() {
         return (

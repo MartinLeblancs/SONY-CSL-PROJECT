@@ -66,7 +66,7 @@ function ButtonsTimer(props) {
     return (
         <section className="container">
             <div style={{position: "absolute", left: 100, top: 80}}>
-                <h3>Start:</h3>
+                <h3>Début:</h3>
             </div>
             <section>
                 <TimeField
@@ -87,7 +87,7 @@ function ButtonsTimer(props) {
                 />
             </section>
             <div style={{position: "absolute", left: 1050, top: 80}}>
-                <h3>END:</h3>
+                <h3>Fin:</h3>
             </div>
             <section>
                 <TimeField

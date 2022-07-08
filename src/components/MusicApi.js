@@ -1,10 +1,9 @@
-import React from 'react';
-import * as Tone from "tone"
 import { Midi } from '@tonejs/midi'
+import { musicUpdated } from './MusicList'
 
-export async function MusicApi()
+export async function MusicApi(props)
 {
-    const midi = await Midi.fromUrl("Mario Bros. - Super Mario Bros. Theme.mid");
+    const midi = await Midi.fromUrl(musicUpdated);
     const midiFileInJson = midi.toJSON();
     let timeMidi = 0;
 
