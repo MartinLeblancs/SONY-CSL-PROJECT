@@ -4,7 +4,7 @@ import { Midi } from '@tonejs/midi'
 
 export async function MusicApi()
 {
-    const midi = await Midi.fromUrl("mozart-symphony41-3-piano.mid");
+    const midi = await Midi.fromUrl("Mario Bros. - Super Mario Bros. Theme");
     const midiFileInJson = midi.toJSON();
     let timeMidi = 0;
 

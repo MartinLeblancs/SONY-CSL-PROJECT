@@ -49,7 +49,7 @@ const CustomMenu = React.forwardRef(
 
 class MusicList extends Component {
     handleCLick = (ChosenMusic) => {
-        console.log(ChosenMusic);
+        document.getElementById('test').src=ChosenMusic;
     }
     render() {
         return (
@@ -62,9 +62,9 @@ class MusicList extends Component {
                         <Dropdown >
                             <Dropdown.Toggle as={CustomToggle} />
                             <Dropdown.Menu as={CustomMenu}  variant="dark">
-                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique1')}>Musique1</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique2')}>Musique2</Dropdown.Item>
-                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique3')}>Musique3</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('Mario Bros. - Super Mario Bros. Theme.mid')}>Mario</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('mozart-symphony41-3-piano.mid')}>Mozart</Dropdown.Item>
+                                <Dropdown.Item onClick={() => this.handleCLick('nameMusique3')}>test2</Dropdown.Item>
                                 <Dropdown.Item onClick={() => this.handleCLick('nameMusique4')}>Musique4</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
