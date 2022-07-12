@@ -39,9 +39,28 @@ export async function MusicApi(props)
         responseJSON = await response2.json();
     }
     console.log(responseJSON);
-
-    // let fs = require('fs');
-    // fs.writeFile("thing.json", responseJSON);
-
+    let result = {
+        notes: [],
+        totalTime: 0
+    };
+    let startTimer = responseJSON.notes_region[0].time;
+    for (let i = 0; responseJSON.notes_region[i]; i++)  {
+        let valuePitch = responseJSON.notes_region[i].pitch;
+        let valueStarttime = responseJSON.notes_region[i].time - startTimer;
+        let valueEndtime = (responseJSON.notes_region[i].time + responseJSON.notes_region[i].duration) - startTimer;
+        const obj = {
+            pitch: valuePitch,
+            startTime: valueStarttime,
+            endTime: valueEndtime
+        }
+        result.notes.push(obj)
+        result.totalTime = i + 1;
+    }
+    // Print the result of the API in magenta note sequence format
+    console.log(result);
+    // Playing the note sequence
+    const player = new mm.Player();
+    await player.start(result);
+    player.stop();
     // use the return of the API to set a new midi file
 }
