@@ -1,66 +1,128 @@
-import { Midi } from '@tonejs/midi'
-import { musicUpdated } from './MusicList'
-import { ValueStart, ValueEnd } from './ButtonsTimer'
-import {sequenceProtoToMidi} from "@magenta/music";
-import * as mm from "@magenta/music";
+import { musicUpdated } from "./MusicList";
+import { ValueStart, ValueEnd } from "./ButtonsTimer";
+import * as mm from "@magenta/music/es6";
 
-export async function MusicApi(props)
-{
-    const midi = await Midi.fromUrl(musicUpdated);
-    const midiFileInJson = midi.toJSON();
-    let timeMidi = 0;
+// TODO remove this local player, use the global midi-player/visualizer
+const player = new mm.Player();
 
-    // getting the time of the last note (so the duration of the midi file)
-    for (let j = 0; midiFileInJson.tracks[j]; j++) {
-        for (let i = 0; midiFileInJson.tracks[j].notes[i]; i++)  {
-            if (midiFileInJson.tracks[j].notes[i].time > timeMidi)
-                timeMidi = midiFileInJson.tracks[j].notes[i].time;
+// parse notes as returned by the PIA API to NoteSequence format
+function convertPiaNotesToNoteSequenceNotes(pia_notes) {
+    return pia_notes.map(noteObject => {
+        return {
+            pitch: noteObject.midi ?? noteObject.pitch,
+            // `NoteSequence`s use integer [0-127] velocity range
+            velocity: noteObject.velocity,
+            startTime: noteObject.time,
+            endTime: noteObject.time + noteObject.duration
         }
-    }
+    })
+}
 
-    // modify the file we gonna pass to the api
-    const response = await fetch('piaTestData.json')
-    const data = await response.json();
-    data.clip_end = timeMidi;
-    data.selected_region.start = ValueStart;
-    data.selected_region.end = ValueEnd;
-    data.notes = midiFileInJson.tracks;
-    console.log(data);
+// parse note in NoteSequence format to the format returned by the PIA API
+function _convertNoteSequenceNoteToPiaNoteObject(noteSequence_note) {
+    return {
+        pitch: noteSequence_note.pitch ?? noteSequence_note.midi,
+        // PIA uses float [0-1] velocity range
+        velocity: noteSequence_note.velocity,
+        time: noteSequence_note.startTime,
+        duration: noteSequence_note.endTime - noteSequence_note.startTime,
+        muted: 0
+    }
+}
+
+// flatten a single PIA note for the PIA input note format
+function _piaNoteObjectToFlattenedPiaNote(piaNoteObject) {
+    return [
+        "note",
+        piaNoteObject.pitch,
+        piaNoteObject.time,
+        piaNoteObject.duration,
+        piaNoteObject.velocity,
+        piaNoteObject.muted
+    ]
+}
+
+// flatten a sequence of PIA notes to the PIA input format
+function _convertPiaNoteObjectsToPiaInput(piaNoteObjects) {
+    const piaNotes = piaNoteObjects.map(_piaNoteObjectToFlattenedPiaNote)
+    return ["notes", piaNotes.length, ...piaNotes.flat()]
+}
+
+// convert notes in NoteSequence format to the PIA input format
+function convertNoteSequenceNotesToPiaInputNotes(noteSequence_notes) {
+    const piaNoteObjects = noteSequence_notes.map(
+        (noteSequence_note =>
+            _convertNoteSequenceNoteToPiaNoteObject(noteSequence_note)))
+    return _convertPiaNoteObjectsToPiaInput(piaNoteObjects)
+}
+
+export async function MusicApi(props) {
+    // load MIDI file
+    // TODO retrieve instead the current noteSequence from the global midi-player
+    const initialNoteSequence = await mm.urlToNoteSequence(musicUpdated);
+    const regionStart = ValueStart;
+    const regionEnd = ValueEnd;
+
+    const initialNotesBeforeRegion = initialNoteSequence.notes.filter(
+        (noteObject) => noteObject.startTime < regionStart);
+    const initialNotesAfterRegion = initialNoteSequence.notes.filter(
+        (noteObject) => noteObject.endTime > regionEnd);
+
+    // format loaded noteSequence to PIA input format
+    const initialNotes_piaInput = convertNoteSequenceNotesToPiaInputNotes(
+        initialNoteSequence.notes);
+
+    // retrieve sample PIA data file for constant hyperparameters
+    const piaInputData = await fetch("piaTestData.json");
+    const piaInputData_json = await piaInputData.json();
+
+    // setup PIA API request data
+    piaInputData_json.case = "start"
+    piaInputData_json.clip_start = 0;
+    piaInputData_json.clip_end = initialNoteSequence.totalTime;
+    piaInputData_json.selected_region.start = regionStart;
+    piaInputData_json.selected_region.end = regionEnd;
+    piaInputData_json.notes = initialNotes_piaInput;
+
     // setting the infos we gonna send to the API
-    const requestOptions = {
+    let requestOptions = {
         crossDomain: true,
-        method: 'POST',
-        body: JSON.stringify(data)
+        method: "POST",
+        body: JSON.stringify(piaInputData_json),
     };
+
     console.log("Waiting....");
-    let responseJSON = "false";
-    while (responseJSON.done !== true) {
-        const response2 = await fetch('https://pia.api.cslmusic.team/', requestOptions);
-        responseJSON = await response2.json();
+    let responseJSON = false;
+    const notesResult = []
+    while (!responseJSON || !responseJSON.done) {
+        const response = await fetch(
+            "https://pia.api.cslmusic.team/",
+            requestOptions
+        );
+        responseJSON = await response.json();
+        // save generated region
+        // TODO dynamically update the global midi-player/visualizer with this new chunk
+        //  instead of performing a delayed update with all chunks
+        notesResult.push(...responseJSON.notes_region);
+
+        // update the request for the next chunk
+        responseJSON.case = "continue";
+        requestOptions.body = JSON.stringify(responseJSON);
     }
-    console.log(responseJSON);
-    let result = {
-        notes: [],
-        totalTime: 0
-    };
-    let startTimer = responseJSON.notes_region[0].time;
-    for (let i = 0; responseJSON.notes_region[i]; i++)  {
-        let valuePitch = responseJSON.notes_region[i].pitch;
-        let valueStarttime = responseJSON.notes_region[i].time - startTimer;
-        let valueEndtime = (responseJSON.notes_region[i].time + responseJSON.notes_region[i].duration) - startTimer;
-        const obj = {
-            pitch: valuePitch,
-            startTime: valueStarttime,
-            endTime: valueEndtime
-        }
-        result.notes.push(obj)
-        result.totalTime = i + 1;
-    }
-    // Print the result of the API in magenta note sequence format
-    console.log(result);
+
+    const noteSequence = new mm.NoteSequence({
+        notes: [
+            ...initialNotesBeforeRegion,
+            ...convertPiaNotesToNoteSequenceNotes(notesResult),
+            ...initialNotesAfterRegion
+        ],
+        totalTime: responseJSON.clip_end})
+
+    console.log("Final note sequence: ", noteSequence)
+
     // Playing the note sequence
-    const player = new mm.Player();
-    await player.start(result);
-    player.stop();
-    // use the return of the API to set a new midi file
+    if (player.isPlaying()) {
+        player.stop();
+    };
+    await player.start(noteSequence);
 }
