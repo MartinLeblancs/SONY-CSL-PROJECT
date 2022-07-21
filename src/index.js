@@ -13,15 +13,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <button className="button" role="button" onClick={MusicApi}><span className="text">Soumettre</span></button>
     </React.StrictMode>
 );
-//import { StrictMode } from "react";
-//import ReactDOM from "react-dom";
-//
-//import App from "./App";
-//
-//const rootElement = document.getElementById("root");
-//ReactDOM.render(
-//  <StrictMode>
-//    <App />
-//  </StrictMode>,
-//  rootElement
-//);
