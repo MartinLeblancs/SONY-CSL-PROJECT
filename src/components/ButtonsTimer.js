@@ -1,11 +1,38 @@
-import * as React from 'react';
-import TimeField from 'react-simple-timefield';
-import './ButtonsTimer.css'
+import * as React from "react";
+import TimeField from "react-simple-timefield";
+import "./ButtonsTimer.css";
 
-export let ValueStart = '0';
-export let ValueEnd = '0';
+function getSecondsFromHHMMSS(value) {
+    const [str1, str2, str3] = value.split(":");
 
-export class ButtonsTimer extends React.Component{
+    const val1 = Number(str1);
+    const val2 = Number(str2);
+    const val3 = Number(str3);
+
+    if (!isNaN(val1) && isNaN(val2) && isNaN(val3)) {
+        // seconds
+        return val1;
+    }
+
+    if (!isNaN(val1) && !isNaN(val2) && isNaN(val3)) {
+        // minutes * 60 + seconds
+        return val1 * 60 + val2;
+    }
+
+    if (!isNaN(val1) && !isNaN(val2) && !isNaN(val3)) {
+        // hours * 60 * 60 + minutes * 60 + seconds
+        return val1 * 60 * 60 + val2 * 60 + val3;
+    }
+
+    return 0;
+};
+
+const initialRegionStart_HHMMSS = "00:00:03";
+const initialRegionEnd_HHMMSS = "00:00:05";
+export let ValueStart = getSecondsFromHHMMSS(initialRegionStart_HHMMSS);
+export let ValueEnd = getSecondsFromHHMMSS(initialRegionEnd_HHMMSS);
+
+export class ButtonsTimer extends React.Component {
     constructor() {
         super();
 
@@ -13,91 +40,81 @@ export class ButtonsTimer extends React.Component{
         this.onTimeChange2 = this.onTimeChange2.bind(this);
     }
 
-    getSecondsFromHHMMSS = (value) => {
-        const [str1, str2, str3] = value.split(":");
+    getSecondsFromHHMMSS = getSecondsFromHHMMSS.bind(this);
 
-        const val1 = Number(str1);
-        const val2 = Number(str2);
-        const val3 = Number(str3);
-
-        if (!isNaN(val1) && isNaN(val2) && isNaN(val3)) {
-            // seconds
-            return val1;
-        }
-
-        if (!isNaN(val1) && !isNaN(val2) && isNaN(val3)) {
-            // minutes * 60 + seconds
-            return val1 * 60 + val2;
-        }
-
-        if (!isNaN(val1) && !isNaN(val2) && !isNaN(val3)) {
-            // hours * 60 * 60 + minutes * 60 + seconds
-            return val1 * 60 * 60 + val2 * 60 + val3;
-        }
-
-        return 0;
-    }
     // For ValueStart
     onTimeChange1(event, value) {
-        const newTime1 = value.replace(/-/g, ':');
-        const newValueStart = newTime1.padEnd(8, ValueStart.toString().substring(5, 3));
+        const newTime1 = value.replace(/-/g, ":");
+        const newValueStart = newTime1.padEnd(
+            8,
+            ValueStart.toString().substring(5, 3)
+        );
         ValueStart = this.getSecondsFromHHMMSS(newValueStart);
     }
     // For ValueEnd
     onTimeChange2(event, value) {
-        const newTime2 = value.replace(/-/g, ':');
-        const newValueEnd = newTime2.padEnd(8, ValueEnd.toString().substring(5, 3));
+        const newTime2 = value.replace(/-/g, ":");
+        const newValueEnd = newTime2.padEnd(
+            8,
+            ValueEnd.toString().substring(5, 3)
+        );
         ValueEnd = this.getSecondsFromHHMMSS(newValueEnd);
     }
     render() {
-        const ValueStartBis = ValueStart;
-        const ValueEndBis = ValueEnd;
         return (
-            <section className="container">
-                <div style={{position: "absolute", left: 100, top: 80}}>
-                    <h3>Début:</h3>
+            <section
+                className="container"
+                style={{ position: "relative", height: 200 }}
+            >
+                <div
+                    style={{
+                        position: "absolute",
+                        left: 95,
+                        top: 80,
+                    }}
+                >
+                    <h3>Début</h3>
                 </div>
                 <section>
                     <TimeField
                         showSeconds
-                        value={ValueStartBis}
+                        value={initialRegionStart_HHMMSS}
                         onChange={this.onTimeChange1}
                         style={{
-                            border: '2px solid #666',
+                            border: "2px solid #666",
                             fontSize: 42,
                             width: 180,
-                            padding: '5px 8px',
-                            color: '#333',
+                            padding: "5px 8px",
+                            color: "#333",
                             borderRadius: 3,
                             position: "absolute",
                             left: 50,
-                            top: 120
+                            top: 120,
                         }}
                     />
                 </section>
-                <div style={{position: "absolute", left: 1050, top: 80}}>
-                    <h3>Fin:</h3>
+                <div style={{ position: "absolute", right: 120, top: 80 }}>
+                    <h3>Fin</h3>
                 </div>
                 <section>
                     <TimeField
                         showSeconds
-                        value={ValueEndBis}
+                        value={initialRegionEnd_HHMMSS}
                         onChange={this.onTimeChange2}
                         style={{
-                            border: '2px solid #666',
+                            border: "2px solid #666",
                             fontSize: 42,
                             width: 180,
-                            padding: '5px 8px',
-                            color: '#333',
+                            padding: "5px 8px",
+                            color: "#333",
                             borderRadius: 3,
                             position: "absolute",
-                            left: 1000,
-                            top: 120
-
+                            right: 50,
+                            top: 120,
                         }}
                     />
                 </section>
-            </section>);
-
+            </section>
+        );
     }
 }

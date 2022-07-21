@@ -8,28 +8,26 @@
     <title>SONY - CSL</title>
     <link rel="icon" type="image/x-icon" href="assets/icon.png" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 
 <body class="background" style="background-image: url('assets/background.jpg')">
-<div id="root"></div>
-    
-<section id="section3">
-    <br><br><br>
+
+<div id="root" style="padding-bottom: 20px;"></div>
+
+<section id="player-container">
     <midi-player
       src="Mario Bros. - Super Mario Bros. Theme.mid"
-      sound-font visualizer="#section3 midi-visualizer" id="test">
+      sound-font visualizer="#player-container midi-visualizer" id="test">
     </midi-player>
     <midi-visualizer
       src="Mario Bros. - Super Mario Bros. Theme.mid" id="test">
     </midi-visualizer>
     </section>
 
-    <script src="../src/components/MusicList.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
 <midi-visualizer type="piano-roll" id="myVisualizer"></midi-visualizer>
 </body>
 </html>

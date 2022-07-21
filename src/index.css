@@ -1,7 +1,8 @@
 
 .button{
     position: relative;
-    top: 90px; left: 37%;
+    top: 90px;
+    margin: inherit auto;
     align-items: center;
     background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
     border: 0;
@@ -55,4 +56,8 @@
     .button span {
         line-height: 50px;
     }
+}
+
+html, body {
+    min-width: 500px;
 }

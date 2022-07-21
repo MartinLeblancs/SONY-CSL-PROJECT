@@ -11226,36 +11226,36 @@ header.masthead .post-heading .meta a {
 }
 
 /* Custom player style */
-#section3 midi-player {
+#player-container midi-player {
     display: block;
     width: inherit;
     margin: 4px;
     margin-bottom: 0;
-  }
-  #section3 midi-player::part(control-panel) {
+}
+#player-container midi-player::part(control-panel) {
     background: #919191;
     border: 2px solid #000;
     border-radius: 10px 10px 0 0;
-  }
-  #section3 midi-player::part(play-button) {
+}
+#player-container midi-player::part(play-button) {
     color: #353;
     border: 2px solid currentColor;
     background-color: #4d4;
     border-radius: 20px;
     transition: all 0.2s;
     content: "hello";
-  }
-  #section3 midi-player::part(play-button):hover {
+}
+#player-container midi-player::part(play-button):hover {
     color: #0a0;
     background-color: #5f5;
     border-radius: 10px;
-  }
-  #section3 midi-player::part(time) {
+}
+#player-container midi-player::part(time) {
     font-family: monospace;
-  }
-  
-  /* Custom visualizer style */
-  #section3 midi-visualizer .piano-roll-visualizer {
+}
+
+/* Custom visualizer style */
+#player-container midi-visualizer .piano-roll-visualizer {
     background: #ffd;
     border: 2px solid black;
     border-top: none;
@@ -11263,25 +11263,24 @@ header.masthead .post-heading .meta a {
     margin: 4px;
     margin-top: 0;
     overflow: auto;
-  }
-  #section3 midi-visualizer svg rect.note {
+}
+#player-container midi-visualizer svg rect.note {
     opacity: 0.6;
     stroke-width: 2;
-  }
-  #section3 midi-visualizer svg rect.note[data-instrument="0"] {
+}
+#player-container midi-visualizer svg rect.note[data-instrument="0"] {
     fill: #e22;
     stroke: #500;
-  }
-  #section3 midi-visualizer svg rect.note[data-instrument="2"] {
+}
+#player-container midi-visualizer svg rect.note[data-instrument="2"] {
     fill: #2ee;
     stroke: #055;
-  }
-  #section3 midi-visualizer svg rect.note[data-is-drum="true"] {
+}
+#player-container midi-visualizer svg rect.note[data-is-drum="true"] {
     fill: #888;
     stroke: #888;
-  }
-  #section3 midi-visualizer svg rect.note.active {
+}
+#player-container midi-visualizer svg rect.note.active {
     opacity: 0.9;
     stroke: #000;
-  }
-  
+}

@@ -3,7 +3,7 @@ import {FormControl, Dropdown, Navbar, Nav, Container, DropdownButton} from "rea
 
 export let musicUpdated = 'Mario Bros. - Super Mario Bros. Theme.mid';
 
-const CustomToggle = (({ children, onClick }) => (
+const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <DropdownButton
         onClick={(e) => {
             e.preventDefault();
