@@ -2,6 +2,9 @@
   "name": "sony_project",
   "version": "0.1.0",
   "private": true,
+  "engines" : {
+    "node" : "<=16.0.0"
+  },
   "dependencies": {
     "@magenta/music": "^1.23.1",
     "@testing-library/jest-dom": "^5.16.4",
