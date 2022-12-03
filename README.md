@@ -48,7 +48,7 @@ The project consists in creating a website allowing to recover a partition of a 
 
 ### Group we collaborated with
 SGRO SANDRO &emsp;| sandro.sgro@epitech.eu<br />
-QUEREU Matthieu | matthieu.queru@epitech.eu<br />
+QUERU Matthieu | matthieu.queru@epitech.eu<br />
 LEBLANCS Martin | martin.leblancs@epitech.eu
 
 ## Getting started
